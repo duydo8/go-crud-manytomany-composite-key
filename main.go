@@ -19,7 +19,10 @@ func main() {
 		tag := v1.Group("tag")
 		{
 			tag.GET("/", controller.FindAll)
-			tag.POST("create")
+			tag.POST("create", controller.Create)
+			tag.PUT("update", controller.Update)
+			tag.GET("findById", controller.FindById)
+			tag.DELETE("delete", controller.Delete)
 		}
 		product := v1.Group("product")
 		{
