@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"go-crud-manytomany-composite-key/controller"
 	"go-crud-manytomany-composite-key/initializers"
+
+	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -36,6 +37,11 @@ func main() {
 		{
 			tagProduct.GET("/", controller.FindAllTagProduct)
 			tagProduct.POST("create", controller.CreateTagProduct)
+		}
+		tagProductTest := v1.Group("tagProductTest")
+		{
+			tagProductTest.GET("/", controller.FindAllTagProductTest)
+			tagProductTest.POST("create", controller.CreateTagProductTest)
 		}
 	}
 	r.Run()

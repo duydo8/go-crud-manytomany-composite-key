@@ -2,11 +2,12 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"go-crud-manytomany-composite-key/config"
 	"go-crud-manytomany-composite-key/initializers"
 	"go-crud-manytomany-composite-key/model"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func FindAllTagProduct(context *gin.Context) {

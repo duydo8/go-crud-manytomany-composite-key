@@ -13,3 +13,9 @@ type TagProductCreate struct {
 	TagId     int
 	ProductId int
 }
+type TagProductTest struct {
+	ID         int `gorm:"primaryKey`
+	TagId      int `gorm:"column:tag_id"`
+	ProductId  int `gorm:"column:product_id"`
+	CreateTime time.Time
+}
