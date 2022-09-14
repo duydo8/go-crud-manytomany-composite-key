@@ -26,7 +26,16 @@ func main() {
 		}
 		product := v1.Group("product")
 		{
-			product.GET("")
+			product.GET("/", controller.FindAllProduct)
+			product.POST("create", controller.CreateProduct)
+			product.PUT("update", controller.UpdateProduct)
+			product.GET("findById", controller.FindByIdProduct)
+			product.DELETE("delete", controller.DeleteProduct)
+		}
+		tagProduct := v1.Group("tagProduct")
+		{
+			tagProduct.GET("/", controller.FindAllTagProduct)
+			tagProduct.POST("create", controller.CreateTagProduct)
 		}
 	}
 	r.Run()
