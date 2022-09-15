@@ -1,10 +1,11 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"go-crud-manytomany-composite-key/controller"
 	"go-crud-manytomany-composite-key/initializers"
-
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -15,6 +16,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
+
 	v1 := r.Group("/v1")
 	{
 		tag := v1.Group("tag")
@@ -44,5 +46,6 @@ func main() {
 			tagProductTest.POST("create", controller.CreateTagProductTest)
 		}
 	}
+	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()
 }
