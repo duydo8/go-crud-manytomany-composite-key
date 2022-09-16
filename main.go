@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	swaggerfiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerfiles "github.com/swaggo/files"     // swagger embed files
+	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 	"go-crud-manytomany-composite-key/controller"
+	"go-crud-manytomany-composite-key/docs"
 	"go-crud-manytomany-composite-key/initializers"
 )
 
@@ -14,7 +15,24 @@ func init() {
 	initializers.SyncDatabase()
 }
 
+// @BasePath /api/v1
+
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description do ping
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Helloworld
+// @Router /example/helloworld [get]
 func main() {
+	docs.SwaggerInfo.Title = "Swagger Example API"
+	docs.SwaggerInfo.Description = "This is a sample server Petstore server."
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "petstore.swagger.io"
+	docs.SwaggerInfo.BasePath = "/v2"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 	r := gin.Default()
 
 	v1 := r.Group("/v1")
@@ -46,6 +64,6 @@ func main() {
 			tagProductTest.POST("create", controller.CreateTagProductTest)
 		}
 	}
-	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()
 }
